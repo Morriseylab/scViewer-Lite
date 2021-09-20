@@ -1,0 +1,4 @@
+projects,desc,organism,user,filetype
+COPD Peripheral Lung Epithelium,,human,lungMap,RDS
+Normal Peripheral Lung Epithelium,,human,lungMap,RDS
+Normal Proximal Airway Epithelium,,human,lungMap,RDS
