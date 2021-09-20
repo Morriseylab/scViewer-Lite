@@ -43,7 +43,7 @@ For linux users, other R dependencies include
 
 ## Creating Input data
 
-The input data is created using this [script](https://github.com/bapoorva/scripts/blob/master/RunSeurat_WT.R). 
+The input data is created using the [Seurat vignette](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html) and saved as an RDS file. 
 
 ### Adding your dataset
 
