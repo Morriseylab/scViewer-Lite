@@ -1,5 +1,5 @@
 # scViewer-Lite
-Light version of [SeuratViewer.](https://github.com/Morriseylab/SeuratViewer). This is a R Shiny website for viewing single cell RNA-Seq data analysed using [Seurat.](https://satijalab.org/seurat/) (version 3). You can view the Seurat repository [here](https://github.com/satijalab/seurat)
+Light version of [SeuratViewer](https://github.com/Morriseylab/SeuratViewer). This is a R Shiny website for viewing single cell RNA-Seq data analysed using [Seurat.](https://satijalab.org/seurat/) (version 3). You can view the Seurat repository [here](https://github.com/satijalab/seurat)
 
 ## Introduction
 scViewer Lite reads in the seurat object as an RDS file and enables users to view and download UMAPs and Gene Expression plots of their single cell RNAseq data
