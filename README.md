@@ -23,8 +23,8 @@ sudo apt-get install r-cran-rcppeigen
 ```
 Run the following commands in R to install all required packages
 ```
-install.packages(c("devtools","shiny","shinydashboard","shinyjs","shinyBS","shinyBS","RColorBrewer","reshape2","ggplot2",
-                   "dplyr","tidyr","openssl","httr","plotly","htmlwidgets","DT","shinyRGL","rgl","rglwidget","Seurat","cowplot",
+install.packages(c("devtools","shiny","shinydashboard","shinyjs","shinyBS","RColorBrewer","reshape2","ggplot2",
+                   "dplyr","tidyr","openssl","httr","plotly","htmlwidgets","DT","Seurat","cowplot",
                     "data.table","NMF","tibble"))
 
 #Install packages from bioconductor
