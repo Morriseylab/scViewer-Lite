@@ -45,23 +45,24 @@ ui <- fluidPage(theme = shinytheme("sandstone"),
 tabPanel("Explore Data",
          sidebarLayout(
            sidebarPanel(h3("Controls",align="center"),br(),width = 2,
-                        uiOutput("projectlist"),       
+                        box(title="Plot A",width=12,
+                        uiOutput("umapa"), #Dimensionality reduction method of left plot
                         selectInput("categorya2", "Select plot A variable",c('Celltype' = "clust", 'Gene Expression' = "geneexp"),selected = "clust"),
                         conditionalPanel(condition = "input.categorya2 == 'geneexp'",uiOutput("gene1aui")),
+                        conditionalPanel(condition = "input.categorya2 == 'clust'",
+                         checkboxInput("checklabel1", label = "Check for cell group labelling (A)", value = FALSE)),
+                        checkboxInput("subsa", label = "Check to highlight cells (A)", value = FALSE),
+                        conditionalPanel(condition = "input.subsa ==true",uiOutput("subsaui")) #generate ident list for left plot
+                        ),br(),
+                        box(title="Plot B",width=12,
+                        uiOutput("umapb"), #Dimensionality reduction method of left plot
                         selectInput("categoryb2", "Select plot B variable",c('Celltype' = "clust", 'Gene Expression' = "geneexp"),selected = "clust"),
                         conditionalPanel(condition = "input.categoryb2 == 'geneexp'",uiOutput("gene2aui")),
-                        uiOutput("umapa"), #Dimensionality reduction method of left plot
-                        uiOutput("umapb"), #Dimensionality reduction method of left plot
-                            conditionalPanel(condition = "input.categorya2 == 'clust' || input.categorya2 == 'var'",
-                            checkboxInput("checklabel1", label = "Check for cell group labelling (A)", value = FALSE)
-                            ),
-                        conditionalPanel(condition = "input.categoryb2 == 'clust' || input.categoryb2 == 'var'",
-                            checkboxInput("checklabel2", label = "Check for cell group labelling (B)", value = FALSE)
-                          ),
-                        checkboxInput("subsa", label = "Check to highlight cells (A)", value = FALSE),
+                        conditionalPanel(condition = "input.categoryb2 == 'clust'",
+                                         checkboxInput("checklabel2", label = "Check for cell group labelling (B)", value = FALSE)),
                         checkboxInput("subsb", label = "Check to highlight cells (B)", value = FALSE),
-                        conditionalPanel(condition = "input.subsa ==true",uiOutput("subsaui")), #generate ident list for left plot
-                        conditionalPanel(condition = "input.subsb ==true",uiOutput("subsbui")), #generate ident list for right plot
+                        conditionalPanel(condition = "input.subsb ==true",uiOutput("subsbui")) #generate ident list for right plot
+                        ),br(),
                         sliderInput("pointa2", "Point Size:",min = 0, max = 5, value = 1,step=.25),
                         downloadButton('downloadtsneplot', 'Download Plot')
               ),
