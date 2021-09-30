@@ -34,50 +34,38 @@ ui <- fluidPage(theme = shinytheme("sandstone"),
                         }
                         
                         ")),
-                navbarPage("Morrisey Lab Lung Niche Exploration",
+                navbarPage("LungMap Reference Data",
                    #shinythemes::themeSelector(), 
                    ###### Here : insert shinydashboard dependencies ######
                    header = tagList(
                      useShinydashboard()
                    ),
-######################################################################################################################################
-                   
-                   tabPanel("About",
-                            fluidRow(column(4,h1()),
-                            column(6,box(solidHeader = FALSE,width=9,align="left",
-                           includeHTML("include.html"))),
-                           column(3,h1()))
-                           
-                   ),
+
 ######################################################################################################################################
 tabPanel("Explore Data",
          sidebarLayout(
-           sidebarPanel(h3("Controls",align="center"),br(),width = 4,
+           sidebarPanel(h3("Controls",align="center"),br(),width = 2,
                         uiOutput("projectlist"),       
-                            fluidRow(
-                              column(6,selectInput("categorya2", "Select plot A variable",c('Celltype' = "clust", 'Gene Expression' = "geneexp"),selected = "clust")),
-                              column(6,selectInput("categoryb2", "Select plot B variable",c('Celltype' = "clust", 'Gene Expression' = "geneexp"),selected = "clust"))
+                        selectInput("categorya2", "Select plot A variable",c('Celltype' = "clust", 'Gene Expression' = "geneexp"),selected = "clust"),
+                        conditionalPanel(condition = "input.categorya2 == 'geneexp'",uiOutput("gene1aui")),
+                        selectInput("categoryb2", "Select plot B variable",c('Celltype' = "clust", 'Gene Expression' = "geneexp"),selected = "clust"),
+                        conditionalPanel(condition = "input.categoryb2 == 'geneexp'",uiOutput("gene2aui")),
+                        uiOutput("umapa"), #Dimensionality reduction method of left plot
+                        uiOutput("umapb"), #Dimensionality reduction method of left plot
+                            conditionalPanel(condition = "input.categorya2 == 'clust' || input.categorya2 == 'var'",
+                            checkboxInput("checklabel1", label = "Check for cell group labelling (A)", value = FALSE)
                             ),
-                            fluidRow(
-                              column(6,conditionalPanel(
-                                condition = "input.categorya2 == 'geneexp'",uiOutput("gene1aui")
-                                   )),
-                              column(6,conditionalPanel(
-                                condition = "input.categoryb2 == 'geneexp'",uiOutput("gene2aui")
-                              ))),
-                        fluidRow(
-                         column(6,conditionalPanel(
-                            condition = "input.categorya2 == 'clust' || input.categorya2 == 'var'",
-                            checkboxInput("checklabel1", label = "Check for cell group labelling (A)", value = TRUE)
-                            )),
-                          column(6,conditionalPanel(
-                            condition = "input.categoryb2 == 'clust' || input.categoryb2 == 'var'",
-                            checkboxInput("checklabel2", label = "Check for cell group labelling (B)", value = TRUE)
-                          ))),
+                        conditionalPanel(condition = "input.categoryb2 == 'clust' || input.categoryb2 == 'var'",
+                            checkboxInput("checklabel2", label = "Check for cell group labelling (B)", value = FALSE)
+                          ),
+                        checkboxInput("subsa", label = "Check to highlight cells (A)", value = FALSE),
+                        checkboxInput("subsb", label = "Check to highlight cells (B)", value = FALSE),
+                        conditionalPanel(condition = "input.subsa ==true",uiOutput("subsaui")), #generate ident list for left plot
+                        conditionalPanel(condition = "input.subsb ==true",uiOutput("subsbui")), #generate ident list for right plot
                         sliderInput("pointa2", "Point Size:",min = 0, max = 5, value = 1,step=.25),
                         downloadButton('downloadtsneplot', 'Download Plot')
               ),
-           mainPanel(
+           mainPanel(width=10,
              tags$div(class = "another-box", id = "primariy2",
              box(title = textOutput('title'),solidHeader = TRUE,width=12,status='primary',
                  plotOutput("comptsne2", height = 1000)),
