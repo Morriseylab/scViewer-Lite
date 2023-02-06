@@ -18,12 +18,13 @@ library(scExtras)
 library(shinythemes)
 library(patchwork)
 
-cpallette=c("#64B2CE", "#DA5724", "#74D944", "#CE50CA", "#C0717C", "#CBD588", "#5F7FC7",
-            "#8B4484", "#D3D93E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD",
-            "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D",
-            "#8A7C64", "#599861","#000099","#FFCC66","#99CC33","#CC99CC","#666666", "#695F74","#0447F9",
-            "#89134F","#2CF7F0","#F72C35","#A5B617","#B05927","#B78ED8")
-
+cpallette=c("#64B2CE", "#DA5724","#74D944", "#CE50CA", "#C0717C", "#CBD588", "#5F7FC7",
+                     "#8B4484", "#D3D93E", "#508578", "#D7C1B1", "#689030", "#AD6F3B", "#CD9BCD",
+                     "#D14285", "#6DDE88", "#652926", "#7FDCC0", "#C84248", "#8569D5", "#5E738F", "#D1A33D",
+                     "#8A7C64", "#599861","#000099","#FFCC66","#99CC33","#CC99CC","#666666", "#695F74","#0447F9",
+                     "#89134F","#2CF7F0","#F72C35","#A5B617","#B05927","#B78ED8","#FCFF33","#E87A7A","#99DCF7",
+                     "#786799","#BB1FF6","#1D6316","#BABF6E","#E4EDB7","#CBF910","#F9101B","#34C2BC")
+                     
 shinyServer(function(input, output, session) {
   ###################################################
   ###################################################
@@ -36,7 +37,7 @@ shinyServer(function(input, output, session) {
     #profvis({
     withProgress(session = session, message = 'Loading Data',detail = 'Please Wait...',{
       projects = input$projects
-      inFile = 'data/Reference_core.RDS'
+      inFile = 'data/LungMAP_HumanLung_CellRef_Seed.v1.rds'
       
       scrna=readRDS(inFile)
       return(scrna)
